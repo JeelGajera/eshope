@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://img.icons8.com/3d-fluency/94/shopping-bag.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}{% endblock %} | E-Shope</title>
+  </head>
+
+  <body>
+    {% comment %} Top Navigation Bar {% endcomment %}
+    <nav class="bg-gray-800 p-4 flex justify-between items-center">
+      <div class="flex gap-2">
+        <img width="32" height="24" src="https://img.icons8.com/3d-fluency/94/shopping-bag.png" alt="shopping-bag"/>    
+        <a href="#" class="text-2xl font-semibold text-red-500"> E-Shope </a>
+      </div>
+      <div class="gap-2">
+        <a href="#" class="text-teal-500 hover:text-white bg-gray-900 hover:bg-gray-800 border-red-500 hover:border-[0.5px] rounded-md px-3 py-2 text-md font-medium">New Items</a>
+        <a href="#" class="text-teal-500 hover:text-white bg-gray-900 hover:bg-gray-800 border-red-500 hover:border-[0.5px] rounded-md px-3 py-2 text-md font-medium">Browse</a>
+        <a href="#" class="text-teal-500 hover:text-white bg-gray-900 hover:bg-gray-800 border-red-500 hover:border-[0.5px] rounded-md px-3 py-2 text-md font-medium">Log in</a>
+        <a href="#" class="text-teal-500 hover:text-white bg-gray-900 hover:bg-gray-800 border-red-500 hover:border-[0.5px] rounded-md px-3 py-2 text-md font-medium">Sign up</a>
+      </div>
+    </nav>
+    <div class="px-6">{% block content %}{% endblock %}</div>
+
+    {% comment %} Bottom Fotter {% endcomment %}
+    <footer class="bottom-0 bg-gray-800 p-4 flex justify-center items-center">
+        <span class="text-white text-md">
+            &copy;2023 All rights reserved | Made with ❣️ by <a href="http://github.com/JeelGajera" class="underline underline-offset-2 hover:text-teal-500" >Jeel Gajera</a>        </span>
+    </footer>
+  </body>
+</html>
