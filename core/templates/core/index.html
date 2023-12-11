@@ -3,7 +3,7 @@
 {% block content %}
 <div class="mt-6 px-6 py-12 bg-gray-100 rounded-lg">
   <h2 class="mb-12 text-3xl font-semibold text-teal-500 text-center">
-    Newest Items
+    ✨ Newest Items
   </h2>
   <div class="grid grid-cols-3 gap-3">
     {% for item in items %}
@@ -13,7 +13,7 @@
           <img
             src="{{ item.image.url }}"
             alt="{{ item.name }}"
-            class="rounded-t-xl shadow-md h-96 w-full object-fit"
+            class="rounded-t-xl shadow-md h-96 w-full object-fit p-4 bg-white"
           />
         </div>
         <div class="p-6 rounded-b-xl bg-gray-200">
@@ -36,7 +36,7 @@
       <a href="#">
         <div class="p-6 rounded-xl bg-gray-200">
           <div class="text-lg">{{ category.name }}</div>
-          <div>✨{{ category.items.count }} items</div>
+          <div>🔖{{ category.items.count }} items</div>
         </div>
       </a>
     </div>
