@@ -2,11 +2,15 @@
 {% block content %}
 <div class="flex gap-2 item-center bg-gray-100">
   <div class="col-span-3 w-fit">
-    <img
-      src="{{ item.image.url }}"
-      alt="{{ item.name }}"
-      class="rounded-xl shadow-xl h-[70vh] w-fit object-cover p-4 bg-white m-2"
-    />
+    {% if item.image %}
+      <img
+        src="{{ item.image.url }}"
+        alt="{{ item.name }}"
+        class="rounded-xl shadow-xl h-[70vh] w-fit object-cover p-4 bg-white m-2"
+      />
+    {% else %}
+        <p>No image available</p>
+    {% endif %}
   </div>
   <div class="flex-start flex-col justify-center item-center p-6">
     <h1
@@ -29,20 +33,24 @@
   <h2 class="mb-12 text-3xl font-semibold text-teal-500 text-center">
     ✨ Related Items
   </h2>
-  <div class="grid grid-cols-3 gap-3">
-    {% for item in related_items %}
-    <div class="w-[80%]">
-      <a href="{% url 'item:detail' item.id %}">
+  <div class="grid grid-cols-3 gap-3 mb-1">
+    {% for related_item in related_items %}
+    <div class="w-fit h-fit">
+      <a href="{% url 'item:detail' related_item.id %}">
         <div class="">
-          <img
-            src="{{ item.image.url }}"
-            alt="{{ item.name }}"
-            class="rounded-t-xl shadow-md h-96 w-full object-fit p-4 bg-white"
-          />
+          {% if related_item.image %}
+            <img
+              src="{{ related_item.image.url }}"
+              alt="{{ related_item.name }}"
+              class="p-2 rounded-t-xl shadow-xl w-64 h-56 object-fit bg-white overflow-hidden"
+            />
+          {% else %}
+              <p>No image available</p>
+          {% endif %}
         </div>
-        <div class="p-6 rounded-b-xl bg-gray-200">
-          <div class="text-lg">🛒{{ item.name }}</div>
-          <div>🏷️Price: {{ item.price }}₹</div>
+        <div class="p-2 rounded-b-xl bg-gray-200 w-64">
+          <div class="text-lg">🛒{{ related_item.name }}</div>
+          <div>🏷️Price: {{ related_item.price }}₹</div>
         </div>
       </a>
     </div>

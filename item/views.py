@@ -16,6 +16,7 @@ def detail(request, pk):
 def new(request):
     if request.method == "POST":
         form = NewItemForm(request.POST, request.FILES)
+
         if form.is_valid():
             item = form.save(commit=False)
             item.created_by = request.user
@@ -25,5 +26,4 @@ def new(request):
     else:
         form = NewItemForm()
 
-    return render(request, 'item/form.html',
-                  {'form': form, 'title': '📝New Item'})
+    return render(request, 'item/form.html', {'form': form, 'title': '📝New Item'})
