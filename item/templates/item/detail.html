@@ -1,15 +1,17 @@
-{% extends 'core/layout.html' %} {% block title %} {{ item.name}} {% endblock %}
+{% extends 'core/layout.html' %} 
+{% block title %} {{ item.name}} {% endblock %}
 {% block content %}
-<div class="flex gap-2 item-center bg-gray-100">
+<div class="flex flex-col gap-2 item-center bg-gray-100">
+  <div class="flex justify-center item-center">
   <div class="col-span-3 w-fit">
     {% if item.image %}
-      <img
-        src="{{ item.image.url }}"
-        alt="{{ item.name }}"
-        class="rounded-xl shadow-xl h-[70vh] w-fit object-cover p-4 bg-white m-2"
-      />
+    <img
+      src="{{ item.image.url }}"
+      alt="{{ item.name }}"
+      class="rounded-xl shadow-xl h-[70vh] w-fit object-cover p-4 bg-white m-2"
+    />
     {% else %}
-        <p>No image available</p>
+    <p>No image available</p>
     {% endif %}
   </div>
   <div class="flex-start flex-col justify-center item-center p-6">
@@ -24,37 +26,53 @@
     <p class="text-gray-700">
       <strong>📜Description: </strong><br />{{item.description}}
     </p>
+    {% endif %} 
+
+    {% if request.user == item.created_by %}
+      <div class="flex justify-center item-center gap-2">
+        <a href="{% url 'item:delete' item.id %}">
+          <button class="px-4 py-2 bg-teal-500 text-white rounded-lg shadow-lg hover:bg-red-600">
+            🖊️ Edit
+          </button>
+        </a>
+        <a href="{% url 'item:delete' item.id %}">
+          <button class="px-4 py-2 bg-red-500 text-white rounded-lg shadow-lg hover:bg-red-600">
+            🗑️Delete
+          </button>
+        </a>
+      </div>
     {% endif %}
   </div>
-</div>
+  </div>
 
-{% if related_items %}
-<div class="mt-6 px-6 py-12 bg-gray-100 rounded-lg">
-  <h2 class="mb-12 text-3xl font-semibold text-teal-500 text-center">
-    ✨ Related Items
-  </h2>
-  <div class="grid grid-cols-3 gap-3 mb-1">
-    {% for related_item in related_items %}
-    <div class="w-fit h-fit">
-      <a href="{% url 'item:detail' related_item.id %}">
-        <div class="">
-          {% if related_item.image %}
+  {% if related_items %}
+  <div class="mt-6 px-6 py-12 bg-gray-100 rounded-lg">
+    <h2 class="mb-12 text-3xl font-semibold text-teal-500 text-center">
+      ✨ Related Items
+    </h2>
+    <div class="grid grid-cols-3 gap-3 mb-1">
+      {% for related_item in related_items %}
+      <div class="w-fit h-fit">
+        <a href="{% url 'item:detail' related_item.id %}">
+          <div class="">
+            {% if related_item.image %}
             <img
               src="{{ related_item.image.url }}"
               alt="{{ related_item.name }}"
               class="p-2 rounded-t-xl shadow-xl w-64 h-56 object-fit bg-white overflow-hidden"
             />
-          {% else %}
-              <p>No image available</p>
-          {% endif %}
-        </div>
-        <div class="p-2 rounded-b-xl bg-gray-200 w-64">
-          <div class="text-lg">🛒{{ related_item.name }}</div>
-          <div>🏷️Price: {{ related_item.price }}₹</div>
-        </div>
-      </a>
+            {% else %}
+            <p>No image available</p>
+            {% endif %}
+          </div>
+          <div class="p-2 rounded-b-xl bg-gray-200 w-64">
+            <div class="text-lg">🛒{{ related_item.name }}</div>
+            <div>🏷️Price: {{ related_item.price }}₹</div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
+  {% endif %} {% endblock %}
 </div>
-{% endif %} {% endblock %}
